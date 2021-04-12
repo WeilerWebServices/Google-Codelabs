@@ -1,0 +1,48 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task find_ipaddress(type: Exec) {
+    commandLine '/bin/bash', '-c', 'ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -f2 -d\\ '
+    standardOutput = new ByteArrayOutputStream()
+
+    doLast {
+        print "My IP is " + standardOutput.toString()
+        project.ext.my_ip = standardOutput.toString()   
+    }
+}
+
+task open_website() {
+    dependsOn find_ipaddress
+    doLast {
+        def my_url = "'http://${project.ext.my_ip}:8887/index.html'"
+        exec {
+            if (System.properties['os.name'].toLowerCase().contains('windows')) {
+                // windows
+                commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', my_url
+            } else {
+                // linux 
+                commandLine 'adb', 'shell', 'am', 'start', '-a', 'android.intent.action.VIEW', '-d', my_url
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="awesome-meme">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-image: url("/images/awesome.png");
+        width: 300px;
+        height: 300px;
+        position: relative;
+      }
+      .top, .bottom{
+        position: absolute;
+        font-size: 30px;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+      }
+      .top {
+        top: 20px;
+      }
+      .bottom {
+        bottom: 20px;
+      }
+    </style>
+
+    <div class="top">{{top}}</div>
+    <div class="bottom">{{bottom}}</div>
+  </template>
+
+  <script>
+    class AwesomeMeme {
+     beforeRegister() {
+       this.is = 'awesome-meme';
+       this.properties = {
+         top: {
+           type: String,
+           value: ''
+         },
+         bottom: {
+           type: String,
+           value: ''
+         }
+       };
+     }
+     created() {}
+     ready() {
+       this.top = this.top.toUpperCase();
+       this.bottom = this.bottom.toUpperCase();
+     }
+     attached() {}
+     detached() {}
+     attributeChanged() {}
+    }
+
+    Polymer(AwesomeMeme);
+  </script>
+
+</dom-module>

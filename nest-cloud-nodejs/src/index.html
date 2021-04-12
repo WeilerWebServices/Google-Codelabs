@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Nest Web API Codelab</title>
+    <!-- Load webcomponents-lite.min.js for polyfill support. -->
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js">
+    </script>
+
+    <!-- Load iron layout -->
+    <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+    <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
+
+    <!-- Load some paper components -->
+    <link rel="import" href="../bower_components/paper-button/paper-button.html">
+    <link rel="import" href="../bower_components/paper-input/paper-input.html">
+    <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
+    <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="../bower_components/paper-item/paper-item.html">
+    <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+    <link rel="import" href="../bower_components/paper-card/paper-card.html">
+    <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+
+    <!-- Custom components for this app -->
+    <link rel="import" href="custom_elements/nest-device-page.html">
+
+    <!-- Custom styles for this app -->
+    <link rel="import" href="style.html">
+  </head>
+  <body>
+
+    <paper-toolbar>
+      <span class="title">Nest Web API Codelab</span>
+      <paper-spinner-lite id="connected-spinner"></paper-spinner-lite>
+      <span id="connected-status">Disconnected</span>
+    </paper-toolbar>
+
+    <div id="content">
+      <!-- This block is for connecting to the Nest API the first time -->
+      <section id="setup" class="horizontal layout center-justified">
+        <paper-button raised onclick="dialog.toggle()" id="api-button" class="teal-button">Connect to Nest API</paper-button>
+        <!-- This is for the pincode dialog box -->
+        <paper-dialog id="dialog" no-cancel-on-outside-click no-cancel-on-esc-key>
+          <p>Enter the pincode from the Nest portal:</p>
+          <paper-input label="Pincode" id="pincode-input" always-float-label></paper-input>
+          <paper-button dialog-dismiss class="pink-button" id="cancel-pincode-button">Cancel</paper-button>
+          <paper-button dialog-confirm class="teal-button" id="pincode-button">Accept</paper-button>
+        </paper-dialog>
+      </section>
+
+      <!-- The nest-device-page only gets rendered if the API is connected -->
+      <nest-device-page id="device-page"></nest-device-page>
+
+
+    </div>
+
+    <!-- Our application's javascript -->
+    <script src="app.js"></script>
+    <!-- Script for handling the Nest API authoriation process -->
+    <script src="authorization.js"></script>
+
+  </body>
+
+</html>

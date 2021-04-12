@@ -1,0 +1,39 @@
+<!-- This is a custom polymer element for displaying lists of Nest devices -->
+
+<link rel="../../bower_components/polymer/polymer.html">
+<link rel="import" href="nest-device-list.html">
+
+<dom-module id="nest-device-page">
+
+  <template>
+
+    <template is="dom-if" if="{{hasDevices}}">
+      <!-- render a device list for each of the device types -->
+      <nest-device-list title="Thermostats" devices="{{deviceObject.thermostats}}"></nest-device-list>
+      <nest-device-list title="Smoke + CO Alarms" devices="{{deviceObject.smoke_co_alarms}}"></nest-device-list>
+      <nest-device-list title="Cameras" devices="{{deviceObject.cameras}}"></nest-device-list>
+
+      <style>
+        :host{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+      </style>
+
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'nest-device-page',
+      properties:{
+        deviceObject: Object,
+        hasDevices: Boolean
+      }
+    });
+  </script>
+
+</dom-module>

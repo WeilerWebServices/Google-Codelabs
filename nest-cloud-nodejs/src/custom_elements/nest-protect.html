@@ -1,0 +1,35 @@
+<!-- This is a custom polymer element that displays a card to represent a Nest Protect -->
+
+<link rel="../../bower_components/polymer/polymer.html">
+
+<dom-module id="nest-protect">
+  <template>
+
+    <paper-card heading="{{device.name}}">
+
+    </paper-card>
+
+    <style>
+      :host{
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 1rem;
+      }
+
+      paper-card{
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    </style>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'nest-protect',
+      properties: {
+        device: Object
+      }
+    });
+  </script>
+</dom-module>
